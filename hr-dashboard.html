@@ -3,343 +3,476 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LearnHub — HR Dashboard</title>
+<title>HR Dashboard — LearningHub</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Lora:ital,wght@0,600;0,700;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,wght@0,700;0,800;1,600&display=swap');
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root {
-  --bg:#0E1117; --surface:#161B26; --surface2:#1E2535; --border:#2A3347;
-  --text:#E8ECF4; --muted:#6B7A99; --accent:#F97316; --green:#10B981; --red:#EF4444;
+:root{
+  --bg:#F5F3EE;
+  --surface:#FFFFFF;
+  --border:#E4E0D8;
+  --text:#1C1917;
+  --muted:#78716C;
+  --fin:#16714A;
+  --hlt:#C2410C;
+  --mnd:#5B21B6;
+  --mkt:#1D4ED8;
 }
-body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 .fade-up{animation:fadeUp .5s ease both}
 
-/* TOPBAR */
-.topbar{background:rgba(14,17,23,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-.tb-brand{font-family:'Lora',serif;font-size:18px;font-weight:700}
-.tb-brand span{color:var(--accent)}
-.tb-brand small{font-size:12px;color:var(--muted);font-family:'Sora',sans-serif;font-weight:400;margin-left:10px}
-.tb-actions{display:flex;gap:10px;align-items:center}
-.btn-export{display:flex;align-items:center;gap:6px;padding:8px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s}
-.btn-export:hover{border-color:var(--accent);color:var(--accent)}
-.btn-back{display:flex;align-items:center;gap:6px;padding:8px 16px;background:transparent;border:1px solid var(--border);border-radius:8px;color:var(--muted);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;text-decoration:none;transition:all .2s}
-.btn-back:hover{color:var(--text);border-color:var(--muted)}
+/* ===== TOPBAR ===== */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:rgba(245,243,238,.95);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+  padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.topbar-brand{
+  font-family:'Fraunces',serif;font-size:17px;font-weight:800;
+  display:flex;align-items:center;gap:10px;
+}
+.topbar-brand .b-main span{color:var(--fin)}
+.hr-pill{
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+  padding:4px 12px;border-radius:20px;
+  background:color-mix(in srgb,var(--fin) 12%,transparent);
+  color:var(--fin);border:1px solid color-mix(in srgb,var(--fin) 25%,transparent);
+}
+.back-btn{
+  display:flex;align-items:center;gap:6px;
+  font-size:13px;font-weight:600;color:var(--muted);
+  background:none;border:none;cursor:pointer;font-family:inherit;
+  padding:7px 14px;border-radius:8px;border:1.5px solid var(--border);
+  transition:all .2s;
+}
+.back-btn:hover{background:var(--text);color:#fff;border-color:var(--text)}
 
-/* MAIN */
-main{max-width:1200px;margin:0 auto;padding:36px 28px 80px}
+/* ===== HERO ===== */
+.hero{
+  background:var(--text);color:#fff;
+  padding:48px 24px 44px;
+}
+.hero-inner{max-width:1100px;margin:0 auto}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;
+  color:var(--fin);padding:5px 14px;border-radius:20px;
+  background:color-mix(in srgb,var(--fin) 15%,transparent);
+  border:1px solid color-mix(in srgb,var(--fin) 25%,transparent);
+  margin-bottom:16px;
+}
+.hero h1{
+  font-family:'Fraunces',serif;
+  font-size:clamp(26px,4vw,42px);
+  font-weight:800;line-height:1.2;margin-bottom:10px;
+}
+.hero h1 em{font-style:italic;color:var(--fin)}
+.hero p{font-size:15px;color:rgba(255,255,255,.55);line-height:1.7;max-width:500px;margin-bottom:32px}
+.hero-stats{display:flex;gap:36px;flex-wrap:wrap}
+.hs .hn{
+  font-family:'Fraunces',serif;font-size:36px;font-weight:800;
+  line-height:1;color:#fff;
+}
+.hs .hn.accent{color:var(--fin)}
+.hs .hl{font-size:12px;color:rgba(255,255,255,.4);margin-top:4px;font-weight:500}
 
-/* STATS ROW */
-.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:32px}
-.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:22px;transition:border-color .2s}
-.stat-card:hover{border-color:var(--accent)}
-.sc-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:10px}
-.sc-num{font-family:'Lora',serif;font-size:32px;font-weight:700;color:var(--accent)}
-.sc-sub{font-size:12px;color:var(--muted);margin-top:4px}
+/* ===== MAIN ===== */
+.main{max-width:1100px;margin:0 auto;padding:36px 24px 80px}
 
-/* FILTERS */
-.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px;align-items:center}
-.filter-label{font-size:12px;color:var(--muted);font-weight:600}
-.filter-select{padding:8px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:inherit;font-size:12px;outline:none;cursor:pointer}
-.filter-select:focus{border-color:var(--accent)}
-.filter-search{flex:1;min-width:200px;padding:8px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:inherit;font-size:13px;outline:none}
-.filter-search:focus{border-color:var(--accent)}
-.filter-search::placeholder{color:var(--muted)}
+.section-label{
+  font-size:11px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.14em;color:var(--muted);
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:16px;
+}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* STAT CARDS */
+.stats-row{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));
+  gap:14px;margin-bottom:36px;
+}
+.sc{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:16px;padding:20px 22px;
+  transition:transform .25s,box-shadow .25s;
+}
+.sc:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.07)}
+.sc.hi{
+  border-color:var(--fin);
+  background:linear-gradient(135deg,color-mix(in srgb,var(--fin) 6%,white),white);
+}
+.sc-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:8px}
+.sc-num{font-family:'Fraunces',serif;font-size:36px;font-weight:800;color:var(--text);line-height:1}
+.sc.hi .sc-num{color:var(--fin)}
+.sc-sub{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.5}
+.sc-bar{height:4px;background:var(--border);border-radius:2px;margin-top:14px;overflow:hidden}
+.sc-fill{height:100%;border-radius:2px;background:var(--fin);transition:width .7s ease}
+
+/* CONTROLS */
+.controls{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.search-box{
+  flex:1;min-width:220px;
+  padding:11px 16px;
+  background:var(--surface);border:1.5px solid var(--border);
+  border-radius:10px;font-family:inherit;font-size:14px;color:var(--text);
+  outline:none;transition:border-color .2s,box-shadow .2s;
+}
+.search-box::placeholder{color:var(--muted)}
+.search-box:focus{border-color:var(--fin);box-shadow:0 0 0 3px color-mix(in srgb,var(--fin) 12%,transparent)}
+.sel{
+  padding:11px 14px;background:var(--surface);
+  border:1.5px solid var(--border);border-radius:10px;
+  font-family:inherit;font-size:13px;color:var(--text);
+  outline:none;cursor:pointer;transition:border-color .2s;
+}
+.sel:focus{border-color:var(--fin)}
+.export-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:11px 20px;background:var(--text);color:#fff;
+  border:none;border-radius:10px;font-family:inherit;
+  font-size:13px;font-weight:700;cursor:pointer;
+  transition:opacity .2s,transform .2s;white-space:nowrap;
+}
+.export-btn:hover{opacity:.85;transform:translateY(-1px)}
 
 /* TABLE */
-.table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden}
-.table-header{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid var(--border)}
-.table-header h3{font-size:15px;font-weight:700}
-.table-header span{font-size:12px;color:var(--muted)}
-table{width:100%;border-collapse:collapse}
-thead th{padding:12px 16px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);text-align:left;background:var(--surface2);border-bottom:1px solid var(--border)}
-tbody tr{border-bottom:1px solid var(--border);transition:background .15s}
-tbody tr:hover{background:var(--surface2)}
-tbody tr:last-child{border-bottom:none}
-td{padding:14px 16px;font-size:13px;vertical-align:middle}
-.td-name{font-weight:700;color:var(--text)}
-.td-outlet{color:var(--muted);font-size:12px}
-.td-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#FB923C);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:white;flex-shrink:0}
-.td-user{display:flex;align-items:center;gap:10px}
-.progress-mini{display:flex;align-items:center;gap:8px}
-.pm-bar{width:80px;height:6px;background:var(--border);border-radius:6px;overflow:hidden}
-.pm-fill{height:100%;background:var(--accent);border-radius:6px;transition:width .4s ease}
-.pm-pct{font-size:12px;font-weight:700;color:var(--accent);min-width:32px}
-.mod-badges{display:flex;gap:5px;flex-wrap:wrap}
-.mod-badge{width:28px;height:28px;border-radius:6px;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
-.mod-badge.done{background:rgba(16,185,129,.15);color:#6EE7B7;border:1px solid rgba(16,185,129,.3)}
-.mod-badge.pending{background:var(--border);color:var(--muted);border:1px solid transparent}
-.badge-active{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600}
-.badge-active.done{background:rgba(16,185,129,.1);color:#6EE7B7;border:1px solid rgba(16,185,129,.2)}
-.badge-active.inprog{background:rgba(249,115,22,.1);color:var(--accent);border:1px solid rgba(249,115,22,.2)}
-.badge-active.none{background:var(--border);color:var(--muted)}
-.td-date{font-size:11px;color:var(--muted)}
+.table-wrap{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:18px;overflow:hidden;overflow-x:auto;
+  box-shadow:0 2px 16px rgba(0,0,0,.04);
+}
+table{width:100%;border-collapse:collapse;min-width:680px}
+thead tr{background:color-mix(in srgb,var(--fin) 5%,var(--bg))}
+th{
+  padding:13px 18px;text-align:left;
+  font-size:11px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--muted);
+  border-bottom:1px solid var(--border);white-space:nowrap;
+}
+td{padding:14px 18px;border-top:1px solid var(--border);vertical-align:middle}
+tr:hover td{background:color-mix(in srgb,var(--fin) 2%,white)}
+.td-name{font-size:14px;font-weight:700;color:var(--text)}
+.td-outlet{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:11px;font-weight:600;color:var(--muted);
+  background:var(--bg);border:1px solid var(--border);
+  padding:3px 10px;border-radius:20px;margin-top:4px;
+}
+.prog-label{font-size:12px;font-weight:600;color:var(--text);margin-bottom:5px}
+.prog-bar{height:5px;background:var(--border);border-radius:3px;overflow:hidden;min-width:120px}
+.prog-fill{height:100%;border-radius:3px;background:var(--fin);transition:width .5s ease}
+.pct-num{
+  font-family:'Fraunces',serif;font-size:20px;font-weight:800;
+}
+.badge{display:inline-flex;align-items:center;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px}
+.badge-done{background:color-mix(in srgb,var(--fin) 12%,transparent);color:var(--fin)}
+.badge-prog{background:color-mix(in srgb,var(--mkt) 12%,transparent);color:var(--mkt)}
+.badge-none{background:var(--bg);color:var(--muted);border:1px solid var(--border)}
+.td-time{font-size:12px;color:var(--muted)}
 
-/* EMPTY STATE */
-.empty-state{text-align:center;padding:60px 24px;color:var(--muted)}
-.empty-state .es-icon{font-size:48px;margin-bottom:16px}
-.empty-state h3{font-size:18px;font-weight:700;color:var(--text);margin-bottom:8px}
-.empty-state p{font-size:14px;line-height:1.6}
+.empty-state{text-align:center;padding:56px 24px}
+.empty-state .ei{font-size:40px;margin-bottom:10px}
+.empty-state p{font-size:14px;color:var(--muted)}
 
-/* CHART */
-.chart-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px}
-.chart-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:22px}
-.chart-card h4{font-size:14px;font-weight:700;margin-bottom:18px}
-.bar-chart{display:flex;flex-direction:column;gap:12px}
-.bc-item{display:flex;align-items:center;gap:10px}
-.bc-label{font-size:12px;color:var(--muted);width:80px;flex-shrink:0;text-align:right}
-.bc-track{flex:1;height:10px;background:var(--border);border-radius:10px;overflow:hidden}
-.bc-bar{height:100%;border-radius:10px;background:var(--accent);transition:width .6s ease}
-.bc-val{font-size:12px;font-weight:700;color:var(--text);min-width:28px}
-.donut-wrap{display:flex;align-items:center;gap:24px}
-.donut-legend{display:flex;flex-direction:column;gap:10px}
-.dl-item{display:flex;align-items:center;gap:8px;font-size:13px}
-.dl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+/* BREAKDOWN */
+.breakdown-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:18px;padding:24px;margin-top:32px;
+}
+.bc-header{
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border);
+}
+.bc-icon{
+  width:36px;height:36px;border-radius:10px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:18px;
+  background:color-mix(in srgb,var(--fin) 10%,transparent);
+}
+.bc-header h4{font-family:'Fraunces',serif;font-size:17px;font-weight:800}
+.bc-header p{font-size:13px;color:var(--muted);margin-top:2px}
+.bc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+.bc-mod{background:var(--bg);border-radius:12px;padding:14px 16px}
+.bc-mod-label{font-size:12px;font-weight:700;color:var(--text);margin-bottom:3px}
+.bc-mod-num{font-family:'Fraunces',serif;font-size:22px;font-weight:800;color:var(--fin);margin-bottom:6px}
+.bc-mod-sub{font-size:11px;color:var(--muted);margin-bottom:8px}
+.bc-mini{height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.bc-mini-fill{height:100%;border-radius:2px;background:var(--fin)}
 
-@media(max-width:768px){
-  .chart-row{grid-template-columns:1fr}
-  .stats-row{grid-template-columns:repeat(2,1fr)}
-  .table-wrap{overflow-x:auto}
+/* REFRESH */
+.refresh-row{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:12px;color:var(--muted)}
+.refresh-dot{width:7px;height:7px;border-radius:50%;background:var(--fin);animation:pulse 2s infinite;flex-shrink:0}
+
+@media(max-width:640px){
+  .hero{padding:32px 20px 28px}
+  .hero-stats{gap:20px}
+  .stats-row{grid-template-columns:1fr 1fr}
+  .controls{flex-direction:column}
+  .bc-grid{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
 <body>
 
+<!-- TOPBAR -->
 <div class="topbar">
-  <div class="tb-brand">Learn<span>Hub</span><small>Dashboard HR</small></div>
-  <div class="tb-actions">
-    <button class="btn-export" onclick="exportCSV()">⬇ Export CSV</button>
-    <a href="index.html" class="btn-back">← Portal Karyawan</a>
+  <div class="topbar-brand">
+    <div class="b-main">Learning<span>Hub</span></div>
+    <div class="hr-pill">HR Dashboard</div>
+  </div>
+  <button class="back-btn" onclick="window.location.href='index.html'">← Portal Karyawan</button>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner fade-up">
+    <div class="hero-tag">📊 Monitoring & Analytics</div>
+    <h1>Progress <em>Karyawan</em><br>dalam Genggamanmu.</h1>
+    <p>Pantau siapa yang sudah belajar, modul apa yang sudah diselesaikan, dan siapa yang perlu didorong untuk mulai.</p>
+    <div class="hero-stats" id="hero-stats">
+      <div class="hs"><div class="hn">—</div><div class="hl">Total Karyawan</div></div>
+      <div class="hs"><div class="hn accent">—</div><div class="hl">Selesai Semua Modul</div></div>
+      <div class="hs"><div class="hn">—</div><div class="hl">Dalam Progres</div></div>
+      <div class="hs"><div class="hn">—</div><div class="hl">Belum Mulai</div></div>
+    </div>
   </div>
 </div>
 
-<main>
-  <!-- STATS -->
-  <div class="stats-row fade-up">
-    <div class="stat-card">
-      <div class="sc-label">Total Pengguna</div>
-      <div class="sc-num" id="stat-total">0</div>
-      <div class="sc-sub">Karyawan terdaftar</div>
-    </div>
-    <div class="stat-card">
-      <div class="sc-label">Aktif Belajar</div>
-      <div class="sc-num" id="stat-active">0</div>
-      <div class="sc-sub">Sudah mulai minimal 1 modul</div>
-    </div>
-    <div class="stat-card">
-      <div class="sc-label">Akademi Selesai</div>
-      <div class="sc-num" id="stat-completed">0</div>
-      <div class="sc-sub">Menyelesaikan semua 6 modul</div>
-    </div>
-    <div class="stat-card">
-      <div class="sc-label">Avg. Progress</div>
-      <div class="sc-num" id="stat-avg">0%</div>
-      <div class="sc-sub">Rata-rata keseluruhan</div>
-    </div>
-  </div>
+<!-- MAIN -->
+<div class="main fade-up">
 
-  <!-- CHARTS -->
-  <div class="chart-row fade-up">
-    <div class="chart-card">
-      <h4>📊 Penyelesaian per Modul</h4>
-      <div class="bar-chart" id="bar-chart">
-        <div style="color:var(--muted);font-size:13px">Memuat data...</div>
-      </div>
-    </div>
-    <div class="chart-card">
-      <h4>📍 Distribusi per Outlet</h4>
-      <div class="bar-chart" id="outlet-chart">
-        <div style="color:var(--muted);font-size:13px">Memuat data...</div>
-      </div>
-    </div>
-  </div>
+  <div class="section-label">Ringkasan</div>
+  <div class="stats-row" id="stats-row"></div>
 
-  <!-- FILTERS -->
-  <div class="filters">
-    <span class="filter-label">Filter:</span>
-    <input class="filter-search" id="search-input" placeholder="🔍 Cari nama karyawan..." oninput="renderTable()"/>
-    <select class="filter-select" id="filter-outlet" onchange="renderTable()">
+  <div class="section-label">Data Karyawan</div>
+  <div class="controls">
+    <input class="search-box" id="search" type="text" placeholder="🔍  Cari nama atau outlet..." oninput="renderTable()"/>
+    <select class="sel" id="filter-outlet" onchange="renderTable()">
       <option value="">Semua Outlet</option>
     </select>
-    <select class="filter-select" id="filter-status" onchange="renderTable()">
+    <select class="sel" id="filter-status" onchange="renderTable()">
       <option value="">Semua Status</option>
-      <option value="completed">✅ Selesai Semua</option>
-      <option value="inprog">🔄 Sedang Belajar</option>
-      <option value="none">⏳ Belum Mulai</option>
+      <option value="selesai">✅ Selesai</option>
+      <option value="progres">▶ Dalam Progres</option>
+      <option value="belum">⭕ Belum Mulai</option>
     </select>
+    <button class="export-btn" onclick="exportCSV()">⬇ Export CSV</button>
   </div>
 
-  <!-- TABLE -->
-  <div class="table-wrap fade-up">
-    <div class="table-header">
-      <h3>Daftar Progress Karyawan</h3>
-      <span id="table-count">0 karyawan</span>
-    </div>
-    <div id="table-body">
-      <div class="empty-state">
-        <div class="es-icon">📭</div>
-        <h3>Belum ada data</h3>
-        <p>Data akan muncul di sini setelah karyawan login<br>dan mulai menggunakan LearnHub.</p>
-      </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Karyawan</th>
+          <th>Outlet</th>
+          <th>Progress · Keuangan Pribadi</th>
+          <th>Total</th>
+          <th>Status</th>
+          <th>Terakhir Aktif</th>
+        </tr>
+      </thead>
+      <tbody id="tbl-body"></tbody>
+    </table>
+    <div class="empty-state" id="empty-state" style="display:none">
+      <div class="ei">🔍</div>
+      <p>Tidak ada data yang sesuai filter.</p>
     </div>
   </div>
-</main>
+
+  <div class="refresh-row">
+    <div class="refresh-dot"></div>
+    Data diperbarui otomatis setiap 30 detik
+  </div>
+
+  <div class="breakdown-card" id="breakdown"></div>
+
+</div>
 
 <script>
-const MODULE_LABELS = ['M0','M1','M2','M3','M4','M5'];
-const MODULE_TITLES = ['Peta Marketing','Promo Gagal','Tujuan Promo','Jenis Promo','Framework MATCH','Cek & Worksheet'];
-const TOTAL_MODS = 6;
+const FIN_MODS = [
+  {id:'fin-1', label:'M1 · Kenapa Gaji Habis'},
+  {id:'fin-2', label:'M2 · Aturan 50-30-20'},
+  {id:'fin-3', label:'M3 · Dana Darurat'},
+  {id:'fin-4', label:'M4 · Mulai Investasi'},
+  {id:'fin-5', label:'M5 · Bebas Utang'},
+];
+const TOTAL = 5;
 
-let allData = [];
-
-function loadData() {
-  try {
-    const raw = JSON.parse(localStorage.getItem('lh_hr_data') || '{}');
-    allData = Object.values(raw).map(entry => {
-      const prog = entry.progress || {};
-      const modIds = ['mod0','mod1','mod2','mod3','mod4','mod5'];
-      const doneMods = modIds.filter(m => prog[m]?.completed);
-      const pct = Math.round((doneMods.length / TOTAL_MODS) * 100);
-      return {
-        name: entry.user?.name || 'Unknown',
-        outlet: entry.user?.outlet || '-',
-        progress: prog,
-        doneMods,
-        pct,
-        lastActive: entry.lastActive,
-        joined: Object.values(prog).map(m=>m.completedAt).filter(Boolean).sort()[0]
-      };
-    });
-  } catch(e) { allData = []; }
-}
-
-function renderStats() {
-  const total = allData.length;
-  const active = allData.filter(u => u.doneMods.length > 0).length;
-  const completed = allData.filter(u => u.doneMods.length === TOTAL_MODS).length;
-  const avg = total ? Math.round(allData.reduce((s,u) => s + u.pct, 0) / total) : 0;
-  document.getElementById('stat-total').textContent = total;
-  document.getElementById('stat-active').textContent = active;
-  document.getElementById('stat-completed').textContent = completed;
-  document.getElementById('stat-avg').textContent = avg + '%';
-}
-
-function renderCharts() {
-  // Module completion chart
-  const modIds = ['mod0','mod1','mod2','mod3','mod4','mod5'];
-  const barHtml = modIds.map((mid, i) => {
-    const count = allData.filter(u => u.progress[mid]?.completed).length;
-    const pct = allData.length ? Math.round((count / allData.length) * 100) : 0;
-    return `<div class="bc-item">
-      <div class="bc-label">${MODULE_TITLES[i]}</div>
-      <div class="bc-track"><div class="bc-bar" style="width:${pct}%"></div></div>
-      <div class="bc-val">${count}<span style="color:var(--muted);font-weight:400"> org</span></div>
-    </div>`;
-  }).join('');
-  document.getElementById('bar-chart').innerHTML = barHtml || '<div style="color:var(--muted);font-size:13px">Belum ada data</div>';
-
-  // Outlet chart
-  const outletMap = {};
-  allData.forEach(u => { outletMap[u.outlet] = (outletMap[u.outlet] || 0) + 1; });
-  const outlets = Object.entries(outletMap).sort((a,b) => b[1]-a[1]).slice(0,6);
-  const maxOutlet = outlets[0]?.[1] || 1;
-  const outletHtml = outlets.map(([name, cnt]) => `
-    <div class="bc-item">
-      <div class="bc-label">${name.length > 12 ? name.slice(0,12)+'...' : name}</div>
-      <div class="bc-track"><div class="bc-bar" style="width:${Math.round((cnt/maxOutlet)*100)}%;background:#818CF8"></div></div>
-      <div class="bc-val">${cnt}<span style="color:var(--muted);font-weight:400"> org</span></div>
-    </div>`).join('');
-  document.getElementById('outlet-chart').innerHTML = outletHtml || '<div style="color:var(--muted);font-size:13px">Belum ada data</div>';
-
-  // Fill outlet filter
-  const sel = document.getElementById('filter-outlet');
-  const existing = Array.from(sel.options).map(o => o.value);
-  outlets.forEach(([name]) => { if (!existing.includes(name)) { const o = document.createElement('option'); o.value = name; o.textContent = name; sel.appendChild(o); } });
-}
-
-function renderTable() {
-  const search = document.getElementById('search-input').value.toLowerCase();
-  const outletFilter = document.getElementById('filter-outlet').value;
-  const statusFilter = document.getElementById('filter-status').value;
-
-  let filtered = allData.filter(u => {
-    const matchName = u.name.toLowerCase().includes(search);
-    const matchOutlet = !outletFilter || u.outlet === outletFilter;
-    const matchStatus = !statusFilter ||
-      (statusFilter === 'completed' && u.doneMods.length === TOTAL_MODS) ||
-      (statusFilter === 'inprog' && u.doneMods.length > 0 && u.doneMods.length < TOTAL_MODS) ||
-      (statusFilter === 'none' && u.doneMods.length === 0);
-    return matchName && matchOutlet && matchStatus;
+function loadData(){
+  const rawProgress = JSON.parse(localStorage.getItem('lhub_progress') || '{}');
+  const rawUser = JSON.parse(localStorage.getItem('lhub_user') || 'null');
+  const outletMap = JSON.parse(localStorage.getItem('lhub_outlets') || '{}');
+  const rows = [];
+  Object.entries(rawProgress).forEach(([name, mods]) => {
+    let outlet = outletMap[name] || '—';
+    if(rawUser && rawUser.name === name) outlet = rawUser.outlet;
+    const done = FIN_MODS.filter(m => mods[m.id] === 'done').length;
+    const pct = Math.round((done / TOTAL) * 100);
+    const last = localStorage.getItem('lhub_last_' + name) || '—';
+    rows.push({ name, outlet, mods, done, pct, last });
   });
-
-  document.getElementById('table-count').textContent = `${filtered.length} karyawan`;
-
-  if (filtered.length === 0) {
-    document.getElementById('table-body').innerHTML = `
-      <div class="empty-state">
-        <div class="es-icon">${allData.length === 0 ? '📭' : '🔍'}</div>
-        <h3>${allData.length === 0 ? 'Belum ada data' : 'Tidak ada hasil'}</h3>
-        <p>${allData.length === 0 ? 'Data akan muncul setelah karyawan login dan mulai belajar.' : 'Coba ubah filter pencarian.'}</p>
-      </div>`;
-    return;
+  if(rawUser && !rawProgress[rawUser.name]){
+    rows.push({ name: rawUser.name, outlet: rawUser.outlet, mods:{}, done:0, pct:0, last:'Baru login' });
   }
+  return rows;
+}
 
-  const modIds = ['mod0','mod1','mod2','mod3','mod4','mod5'];
-  const rows = filtered.map(u => {
-    const statusClass = u.doneMods.length === TOTAL_MODS ? 'done' : u.doneMods.length > 0 ? 'inprog' : 'none';
-    const statusLabel = u.doneMods.length === TOTAL_MODS ? '✅ Selesai' : u.doneMods.length > 0 ? `🔄 ${u.doneMods.length}/${TOTAL_MODS} modul` : '⏳ Belum mulai';
-    const lastDate = u.lastActive ? new Date(u.lastActive).toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'}) : '-';
-    const modBadges = modIds.map((mid, i) =>
-      `<div class="mod-badge ${u.progress[mid]?.completed ? 'done' : 'pending'}" title="${MODULE_TITLES[i]}">${i}</div>`
-    ).join('');
+let allRows = [];
+
+function init(){
+  allRows = loadData();
+  renderHero();
+  renderStats();
+  renderOutletFilter();
+  renderTable();
+  renderBreakdown();
+}
+
+function renderHero(){
+  const t = allRows.length;
+  const s = allRows.filter(r => r.pct === 100).length;
+  const p = allRows.filter(r => r.pct > 0 && r.pct < 100).length;
+  const b = allRows.filter(r => r.pct === 0).length;
+  document.getElementById('hero-stats').innerHTML = `
+    <div class="hs"><div class="hn">${t}</div><div class="hl">Total Karyawan</div></div>
+    <div class="hs"><div class="hn accent">${s}</div><div class="hl">Selesai Semua Modul</div></div>
+    <div class="hs"><div class="hn">${p}</div><div class="hl">Dalam Progres</div></div>
+    <div class="hs"><div class="hn">${b}</div><div class="hl">Belum Mulai</div></div>
+  `;
+}
+
+function renderStats(){
+  const t = allRows.length || 1;
+  const s = allRows.filter(r => r.pct === 100).length;
+  const p = allRows.filter(r => r.pct > 0 && r.pct < 100).length;
+  const b = allRows.filter(r => r.pct === 0).length;
+  const avg = Math.round(allRows.reduce((sum, r) => sum + r.pct, 0) / t);
+  const pctS = Math.round(s / t * 100);
+  document.getElementById('stats-row').innerHTML = `
+    <div class="sc">
+      <div class="sc-label">Total Karyawan</div>
+      <div class="sc-num">${allRows.length}</div>
+      <div class="sc-sub">terdaftar di platform</div>
+    </div>
+    <div class="sc hi">
+      <div class="sc-label">Selesai Semua</div>
+      <div class="sc-num">${s}</div>
+      <div class="sc-sub">${pctS}% dari total karyawan</div>
+      <div class="sc-bar"><div class="sc-fill" style="width:${pctS}%"></div></div>
+    </div>
+    <div class="sc">
+      <div class="sc-label">Dalam Progres</div>
+      <div class="sc-num">${p}</div>
+      <div class="sc-sub">sedang aktif belajar</div>
+    </div>
+    <div class="sc">
+      <div class="sc-label">Belum Mulai</div>
+      <div class="sc-num">${b}</div>
+      <div class="sc-sub">perlu didorong segera</div>
+    </div>
+    <div class="sc">
+      <div class="sc-label">Rata-rata Progress</div>
+      <div class="sc-num">${avg}%</div>
+      <div class="sc-sub">seluruh karyawan</div>
+      <div class="sc-bar"><div class="sc-fill" style="width:${avg}%"></div></div>
+    </div>
+  `;
+}
+
+function renderOutletFilter(){
+  const outlets = [...new Set(allRows.map(r => r.outlet).filter(o => o && o !== '—'))].sort();
+  const sel = document.getElementById('filter-outlet');
+  sel.innerHTML = '<option value="">Semua Outlet</option>' +
+    outlets.map(o => `<option value="${o}">${o}</option>`).join('');
+}
+
+function renderTable(){
+  const q = document.getElementById('search').value.toLowerCase();
+  const fo = document.getElementById('filter-outlet').value;
+  const fs = document.getElementById('filter-status').value;
+  let rows = allRows.filter(r => {
+    if(q && !r.name.toLowerCase().includes(q) && !r.outlet.toLowerCase().includes(q)) return false;
+    if(fo && r.outlet !== fo) return false;
+    if(fs === 'selesai' && r.pct !== 100) return false;
+    if(fs === 'progres' && !(r.pct > 0 && r.pct < 100)) return false;
+    if(fs === 'belum' && r.pct !== 0) return false;
+    return true;
+  });
+  const empty = document.getElementById('empty-state');
+  const tbody = document.getElementById('tbl-body');
+  if(rows.length === 0){ tbody.innerHTML = ''; empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+  tbody.innerHTML = rows.map(r => {
+    const bc = r.pct === 100 ? 'badge-done' : r.pct > 0 ? 'badge-prog' : 'badge-none';
+    const bt = r.pct === 100 ? '✅ Selesai' : r.pct > 0 ? '▶ Progres' : '⭕ Belum';
+    const pc = r.pct === 100 ? 'var(--fin)' : r.pct > 0 ? 'var(--mkt)' : 'var(--muted)';
     return `<tr>
-      <td><div class="td-user"><div class="td-avatar">${u.name[0].toUpperCase()}</div><div><div class="td-name">${u.name}</div><div class="td-outlet">${u.outlet}</div></div></div></td>
-      <td><div class="progress-mini"><div class="pm-bar"><div class="pm-fill" style="width:${u.pct}%"></div></div><div class="pm-pct">${u.pct}%</div></div></td>
-      <td><div class="mod-badges">${modBadges}</div></td>
-      <td><span class="badge-active ${statusClass}">${statusLabel}</span></td>
-      <td><div class="td-date">${lastDate}</div></td>
+      <td><div class="td-name">${r.name}</div></td>
+      <td><div class="td-outlet">📍 ${r.outlet}</div></td>
+      <td>
+        <div class="prog-label">${r.done} dari ${TOTAL} modul</div>
+        <div class="prog-bar"><div class="prog-fill" style="width:${r.pct}%"></div></div>
+      </td>
+      <td><span class="pct-num" style="color:${pc}">${r.pct}%</span></td>
+      <td><span class="badge ${bc}">${bt}</span></td>
+      <td class="td-time">${r.last}</td>
     </tr>`;
   }).join('');
-
-  document.getElementById('table-body').innerHTML = `
-    <table>
-      <thead><tr>
-        <th>Karyawan</th>
-        <th>Progress</th>
-        <th>Modul (M0–M5)</th>
-        <th>Status</th>
-        <th>Terakhir Aktif</th>
-      </tr></thead>
-      <tbody>${rows}</tbody>
-    </table>`;
 }
 
-function exportCSV() {
-  if (allData.length === 0) { alert('Belum ada data untuk diekspor.'); return; }
-  const modIds = ['mod0','mod1','mod2','mod3','mod4','mod5'];
-  const headers = ['Nama','Outlet','Progress (%)','M0-Peta Marketing','M1-Promo Gagal','M2-Tujuan Promo','M3-Jenis Promo','M4-Framework MATCH','M5-Cek & Worksheet','Terakhir Aktif'];
-  const rows = allData.map(u => [
-    u.name, u.outlet, u.pct + '%',
-    ...modIds.map(mid => u.progress[mid]?.completed ? 'Selesai' : 'Belum'),
-    u.lastActive ? new Date(u.lastActive).toLocaleDateString('id-ID') : '-'
+function renderBreakdown(){
+  const t = allRows.length || 1;
+  const stats = FIN_MODS.map(m => ({
+    ...m,
+    done: allRows.filter(r => r.mods[m.id] === 'done').length,
+    pct: Math.round(allRows.filter(r => r.mods[m.id] === 'done').length / t * 100)
+  }));
+  document.getElementById('breakdown').innerHTML = `
+    <div class="bc-header">
+      <div class="bc-icon">💰</div>
+      <div>
+        <h4>Akademi Keuangan Pribadi</h4>
+        <p>Tingkat penyelesaian per modul dari seluruh karyawan</p>
+      </div>
+    </div>
+    <div class="bc-grid">
+      ${stats.map(m => `
+        <div class="bc-mod">
+          <div class="bc-mod-label">${m.label}</div>
+          <div class="bc-mod-num">${m.done} <span style="font-size:13px;font-weight:600;color:var(--muted)">orang</span></div>
+          <div class="bc-mod-sub">${m.pct}% dari total karyawan</div>
+          <div class="bc-mini"><div class="bc-mini-fill" style="width:${m.pct}%"></div></div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function exportCSV(){
+  const headers = ['Nama','Outlet','M1','M2','M3','M4','M5','Progress (%)','Status'];
+  const rows = allRows.map(r => [
+    r.name, r.outlet,
+    ...FIN_MODS.map(m => r.mods[m.id] === 'done' ? 'Selesai' : 'Belum'),
+    r.pct + '%',
+    r.pct === 100 ? 'Selesai' : r.pct > 0 ? 'Dalam Progres' : 'Belum Mulai'
   ]);
-  const csv = [headers, ...rows].map(r => r.map(v => `"${v}"`).join(',')).join('\n');
-  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a'); a.href = url;
-  a.download = `learnhub_progress_${new Date().toISOString().slice(0,10)}.csv`;
-  a.click(); URL.revokeObjectURL(url);
+  const csv = [headers, ...rows].map(r => r.map(c => `"${c}"`).join(',')).join('\n');
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `learninghub-${new Date().toLocaleDateString('id-ID').replace(/\//g,'-')}.csv`;
+  a.click();
 }
 
-// INIT
-loadData();
-renderStats();
-renderCharts();
-renderTable();
-
-// Auto refresh every 30s
-setInterval(() => { loadData(); renderStats(); renderCharts(); renderTable(); }, 30000);
+init();
+setInterval(() => { allRows = loadData(); renderHero(); renderStats(); renderTable(); renderBreakdown(); }, 30000);
 </script>
 </body>
 </html>
